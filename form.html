@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>my first from</title>
+</head>
+
+<body>
+    <h1 align="center">Registration Form</h1>
+    <br />
+
+    <form name="reg" action="xyz.php" method="post">
+        <table align="center" border="0" bgcolor="#FFFF99" cellpadding="3px" cellspacing="10px" width="450px">
+            <tr>
+                <td>User id:</td>
+                <td>
+                    <input type="text" name="uid" size="30" required autofocus /> *
+                </td>
+            </tr>
+
+            <tr>
+                <td>First Name:</td>
+                <td>
+                    <input type="text" name="username" size="30" required placeholder="enter alphbets only" pattern="[a-z A-Z]{1,10}" /> *
+                </td>
+            </tr>
+
+            <tr>
+                <td>Email ID:</td>
+                <td>
+                    <input type="email" name="lastname" size="30" required /> * validate
+                </td>
+            </tr>
+
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="password" name="pass" size="30" required autocomplete="off" /> *
+                </td>
+            </tr>
+
+            <tr>
+                <td>Url:</td>
+                <td>
+                    <input type="URL" name="email" size="30" required /> * validate
+                </td>
+            </tr>
+
+            <tr>
+                <td>Mobile No:</td>
+                <td>
+                    <input type="number" name="mob" size="30" pattern="[0-9]{10}" title="Please Enter Your 10 digit mobile number " /> * 10 digit
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter Birthdate</td>
+                <td>
+                    <input type="date" name="zip" size="30" required max="2000-1-31" /> *
+                </td>
+            </tr>
+
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" name="gen" value="Male" />Male
+                    <input type="radio" name="gen" value="Female" />Female
+                </td>
+            </tr>
+
+            <tr>
+                <td>Select Range :</td>
+                <td>
+                    - <input type="range" id="a" value="50" step="5" /> +
+                    <output id="x">50</output>
+                </td>
+            </tr>
+
+            <br /><br /> -->
+
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="submit" value="Submit" />
+                    <input type="submit" formaction="demoadmin.html" value="Submitt as Admin" />
+                    <input type="submit" formaction="demoadmin.html" formmethod="post" value="Submitt as POST" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

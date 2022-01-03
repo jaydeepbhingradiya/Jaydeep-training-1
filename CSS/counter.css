@@ -1,0 +1,21 @@
+body {
+    counter-reset: fname;
+}
+
+h1::before {
+    content: counter(fname)" : ";
+    counter-increment: fname;
+}
+
+h1 {
+    counter-reset: mark;
+}
+
+h2::before {
+    content: counter(fname)"."counter(mark)" : ";
+    counter-increment: mark;
+}
+
+.order {
+    list-style-image: url(images/bird.jpg);
+}

@@ -1,0 +1,49 @@
+div {
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+    position: absolute;
+    font-size: 30px;
+}
+
+
+/* 
+#one {
+    left: 50px;
+    border: 2px solid red;
+}
+
+#two {
+    left: 10%;
+    border: 2px solid blue;
+}
+
+#three {
+    left: auto;
+    border: 2px solid orangered;
+}
+
+#four {
+    border: 8px solid green;
+    left: initial;
+} */
+
+#one {
+    right: -100px;
+    border-image: url(images/bird.jpg) 60 / 20px 20px round;
+}
+
+#two {
+    right: -30%;
+    border: 5px solid blue;
+}
+
+#three {
+    right: auto;
+    border: 5px solid red;
+}
+
+#four {
+    right: initial;
+    border: 5px solid lightblue;
+}

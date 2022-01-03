@@ -1,0 +1,34 @@
+/* demo external css file  */
+
+.display {
+  border: 2px solid red;
+  height: 100px;
+  width: 200px;
+  display: inline-block;
+  cursor: alias;
+}
+img {
+  display: block;
+  margin: 10px;
+}
+button {
+  font-size: 20px;
+}
+#bn1 {
+  background-color: red;
+}
+#bn2 {
+  background-color: blue;
+}
+#bn3 {
+  background-color: yellow;
+}
+#bn4 {
+  border: 2px solid black;
+}
+#bn5 {
+  border: 3px dotted orange;
+}
+#bn6 {
+  border: 3px groove khaki;
+}

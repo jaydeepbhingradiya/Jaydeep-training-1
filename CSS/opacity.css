@@ -1,0 +1,48 @@
+#div1 {
+    background-color: red;
+    height: 150px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+#div1:hover {
+    opacity: 0.5;
+}
+
+#div2 {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+    margin-top: -70px;
+    filter: blur(5px);
+}
+
+img {
+    /* height: 200px;
+    width: 200px; */
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* filter: brightness(110%); */
+    /* filter: invert(60%); */
+    /* filter: hue-rotate(180deg); */
+    /* filter: grayscale(50%); */
+    border: 2px solid green;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.scroll {
+    background-color: khaki;
+    height: 100px;
+    width: 100px;
+    overflow: scroll;
+}
+
+.hidden {
+    background-color: yellowgreen;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}

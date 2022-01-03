@@ -1,0 +1,35 @@
+.contener {
+    background-color: indianred;
+    padding: 20px;
+    display: grid;
+    grid-template-areas: 'header header header header header header' 'menu main main main right right' 'menu footer footer footer footer footer ';
+    grid-gap: 10px;
+}
+
+.grid-sub {
+    background-color: khaki;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+#one {
+    grid-area: header;
+}
+
+#two {
+    grid-area: menu;
+}
+
+#three {
+    grid-area: main;
+}
+
+#four {
+    grid-area: right;
+}
+
+#five {
+    grid-area: footer;
+}
+
+#div1 {}

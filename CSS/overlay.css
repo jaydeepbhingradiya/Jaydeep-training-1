@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.para img {
+    height: 400px;
+    width: 400px;
+    align-items: center;
+}
+
+.child {
+    position: absolute;
+    height: 400px;
+    width: 400px;
+    background-color: khaki;
+    top: 0;
+    left: 20px;
+    opacity: 0;
+}
+
+.child:hover {
+    opacity: 0.3;
+    transition: 0.9s ease;
+}

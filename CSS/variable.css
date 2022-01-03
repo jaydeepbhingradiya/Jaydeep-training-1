@@ -1,0 +1,25 @@
+:root {
+    --bg-color: lightblue;
+}
+
+div {
+    --main-color: red;
+    background-color: var(--bg-color);
+    font-size: 20px;
+    page-break-after: always;
+}
+
+p {
+    color: var(--main-color);
+}
+
+#pic {
+    margin-top: 10px;
+    height: 500px;
+    width: 1000px;
+    object-fit: contain;
+    border: 5px solid black;
+    background-color: lightblue;
+    object-fit: none;
+    object-position: 50% 50%;
+}

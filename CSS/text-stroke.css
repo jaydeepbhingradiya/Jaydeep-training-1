@@ -1,0 +1,14 @@
+div {
+    color: white;
+    font-size: 25px;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: brown;
+}
+
+
+/* div {
+    color: white;
+    font-size: 50px;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: red;
+} */

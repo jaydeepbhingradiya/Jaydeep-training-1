@@ -1,0 +1,47 @@
+#perent {
+    border: 2px solid red;
+    height: 200px;
+    width: 500px;
+    padding: 100px;
+    margin: 100px;
+}
+
+#one {
+    background-color: blue;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+}
+
+#two {
+    background-color: khaki;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    right: 10px;
+}
+
+#three {
+    background-color: orange;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    position: fixed;
+    top: 1opx;
+    right: 10px;
+}
+
+p {
+    text-align: center;
+    text-transform: capitalize;
+    color: blue;
+    font-size: 2em;
+}
+
+#box {
+    outline: 2px solid red;
+}

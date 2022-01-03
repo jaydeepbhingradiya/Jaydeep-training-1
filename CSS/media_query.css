@@ -1,0 +1,53 @@
+#one {
+    float: left;
+    width: 70%;
+    background-color: aqua;
+}
+
+#two {
+    float: left;
+    width: 30%;
+    background-color: burlywood;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+@media screen and (max-width: 500px) {
+    #one {
+        width: 60%;
+    }
+    #two {
+        width: 40%;
+    }
+    h1 {
+        text-align: center;
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 200px) {
+    #one {
+        width: 100%;
+    }
+    #two {
+        width: 100%;
+    }
+    h1 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 160px) {
+    #one {
+        width: 100%;
+    }
+    #two {
+        width: 100%;
+    }
+    h1 {
+        text-align: center;
+        font-size: 10px;
+    }
+}
