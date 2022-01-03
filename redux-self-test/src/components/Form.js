@@ -21,10 +21,6 @@ export default function Form(props) {
         id: Math.random().toString(),
       })
     );
-    // setName("");
-    // setEmail("");
-    // setNumber("");
-    // setAddress("");
   };
 
   return (
@@ -48,7 +44,7 @@ export default function Form(props) {
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 value={email}
-                type="text"
+                type="email"
                 size="30"
                 placeholder="Email"
               />
