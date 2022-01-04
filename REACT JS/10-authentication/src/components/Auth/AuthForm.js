@@ -1,46 +1,64 @@
-import { useState, useRef } from "react";
-
+import { useState, useRef, useContext } from "react";
+import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
+  const history = useHistory();
+  const authctx = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
-
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+  const submitHandler = (event) => {
+    event.preventDefault();
 
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+
+    let url;
     if (isLogin) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAYTnIiiu-dtqtpO-aAQxwF2aIcblE1fIo";
     } else {
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAYTnIiiu-dtqtpO-aAQxwF2aIcblE1fIo",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email,
-            password,
-            rtnSecureTokan: true,
-          }),
-          headers: {
-            "Content-Type": "application/jsonx`x",
-          },
-        }
-      ).then((res) => {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAYTnIiiu-dtqtpO-aAQxwF2aIcblE1fIo";
+    }
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
         if (res.ok) {
+          return res.json();
         } else {
           return res.json().then((data) => {
-            console.log(data);
+            let errorMessage = "Authentication failed!";
+            if (data && data.error && data.error.message) {
+              errorMessage = data.error.message;
+            }
+            throw new Error(errorMessage);
           });
         }
+      })
+      .then((data) => {
+        authctx.login(data.idToken);
+        history.replace("./profile");
+      })
+      .catch((err) => {
+        alert(err.message);
       });
-    }
   };
 
   return (
