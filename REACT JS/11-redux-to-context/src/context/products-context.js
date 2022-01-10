@@ -6,6 +6,7 @@ export const ProductsContext = React.createContext({
 });
 
 export default (props) => {
+  const { children } = props;
   const [productsList, setProductsList] = useState([
     {
       id: "p1",
@@ -48,7 +49,7 @@ export default (props) => {
     <ProductsContext.Provider
       value={{ products: productsList, toggleFav: toggleFavorite }}
     >
-      {props.children}
+      {children}
     </ProductsContext.Provider>
   );
 };

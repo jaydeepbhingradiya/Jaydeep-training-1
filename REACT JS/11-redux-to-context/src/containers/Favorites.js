@@ -4,6 +4,7 @@ import FavoriteItem from "../components/Favorites/FavoriteItem";
 import "./Products.css";
 
 const Favorites = (props) => {
+  const { id, title, description } = props;
   const favoriteProducts = useContext(ProductsContext).products.filter(
     (p) => p.isFavorite
   );
@@ -13,10 +14,10 @@ const Favorites = (props) => {
       <ul className="products-list">
         {favoriteProducts.map((prod) => (
           <FavoriteItem
-            key={prod.id}
-            id={prod.id}
-            title={prod.title}
-            description={prod.description}
+            key={id}
+            id={id}
+            title={title}
+            description={description}
           />
         ))}
       </ul>
