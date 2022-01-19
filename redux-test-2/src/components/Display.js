@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Table, Button, Modal, FormControl } from "react-bootstrap";
 
 function Display() {
   const tableData = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const [modelData, setModelData] = useState({});
+  const [viewData, setviewData] = useState({});
+  const [viewModel, setViewModel] = useState(false);
+  const [editModel, setEditModel] = useState(false);
 
   const editDataHandler = (data) => {
     // console.log("click", data);
     setModelData(data);
     console.log("mopdel data", modelData);
+  };
+
+  const viewModelData = (data) => {
+    setviewData(data);
   };
 
   return (
@@ -24,7 +32,8 @@ function Display() {
             <th>Email</th>
             <th>Phone</th>
             <th>DOB</th>
-            <th>Edit</th>
+            <th>Edit User</th>
+            <th>View User</th>
           </tr>
         </thead>
         <tbody>
@@ -43,9 +52,26 @@ function Display() {
                       onClick={() => {
                         editDataHandler(data);
                         setShow(true);
+                        setEditModel(true);
+                        setViewModel(false);
                       }}
                     >
                       Edit
+                    </Button>
+                  }
+                </td>
+                <td>
+                  {
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        viewModelData(data);
+                        setShow(true);
+                        setEditModel(false);
+                        setViewModel(true);
+                      }}
+                    >
+                      View
                     </Button>
                   }
                 </td>
@@ -54,21 +80,77 @@ function Display() {
           })}
         </tbody>
       </Table>
-      {Object.keys(modelData).length !== 0 && (
+      {editModel && (
         <Modal show={show}>
           <Modal.Title>User Information Form</Modal.Title>
           <Modal.Body>
             <Modal.Header>Name</Modal.Header>
-            <FormControl type="text" value={modelData.name}></FormControl>
+            <FormControl
+              type="text"
+              value={modelData.name}
+              onChange={(e) => {
+                setModelData({ ...modelData, name: e.target.value });
+              }}
+            ></FormControl>
             <Modal.Header>Email</Modal.Header>
-            <FormControl type="text" value={modelData.email}></FormControl>
+            <FormControl
+              type="text"
+              value={modelData.email}
+              onChange={(e) => {
+                setModelData({ ...modelData, email: e.target.value });
+              }}
+            ></FormControl>
             <Modal.Header>Phone</Modal.Header>
-            <FormControl type="text" value={modelData.phone}></FormControl>
+            <FormControl
+              type="text"
+              value={modelData.phone}
+              onChange={(e) => {
+                setModelData({ ...modelData, phone: e.target.value });
+              }}
+            ></FormControl>
             <Modal.Header>DOB</Modal.Header>
-            <FormControl type="date" value={modelData.date}></FormControl>
+            <FormControl
+              type="date"
+              value={modelData.date}
+              onChange={(e) => {
+                setModelData({ ...modelData, date: e.target.value });
+              }}
+            ></FormControl>
           </Modal.Body>
           <Modal.Footer>
-            <Button>Submit</Button>
+            <Button
+              onClick={() => {
+                dispatch({ type: "EDIT_USER", payload: modelData });
+                setShow(false);
+              }}
+            >
+              Submit
+            </Button>
+            <Button
+              onClick={() => {
+                setShow(false);
+                setModelData({});
+              }}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+      {viewModel && (
+        <Modal show={show}>
+          <Modal.Title>User Information Form</Modal.Title>
+          <Modal.Body>
+            <Modal.Header>Name</Modal.Header>
+            <FormControl type="text" value={viewData.name}></FormControl>
+            <Modal.Header>Email</Modal.Header>
+            <FormControl type="text" value={viewData.email}></FormControl>
+            <Modal.Header>Phone</Modal.Header>
+            <FormControl type="text" value={viewData.phone}></FormControl>
+            <Modal.Header>DOB</Modal.Header>
+            <FormControl type="date" value={viewData.date}></FormControl>
+          </Modal.Body>
+          <Modal.Footer>
             <Button
               onClick={() => {
                 setShow(false);
