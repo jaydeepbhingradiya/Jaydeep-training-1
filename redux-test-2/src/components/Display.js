@@ -13,7 +13,6 @@ function Display() {
   const [editModel, setEditModel] = useState(false);
 
   const editDataHandler = (data) => {
-    // console.log("click", data);
     setModelData(data);
     console.log("mopdel data", modelData);
   };
@@ -22,6 +21,19 @@ function Display() {
     setviewData(data);
   };
 
+  const editModelHandler = (data) => {
+    editDataHandler(data);
+    setShow(true);
+    setEditModel(true);
+    setViewModel(false);
+  };
+
+  const viewModelHandler = (data) => {
+    viewModelData(data);
+    setShow(true);
+    setEditModel(false);
+    setViewModel(true);
+  };
   return (
     <div>
       <Table striped bordered hover size="sm">
@@ -49,12 +61,7 @@ function Display() {
                   {
                     <Button
                       variant="primary"
-                      onClick={() => {
-                        editDataHandler(data);
-                        setShow(true);
-                        setEditModel(true);
-                        setViewModel(false);
-                      }}
+                      onClick={() => editModelHandler(data)}
                     >
                       Edit
                     </Button>
@@ -64,12 +71,7 @@ function Display() {
                   {
                     <Button
                       variant="primary"
-                      onClick={() => {
-                        viewModelData(data);
-                        setShow(true);
-                        setEditModel(false);
-                        setViewModel(true);
-                      }}
+                      onClick={() => viewModelHandler(data)}
                     >
                       View
                     </Button>
