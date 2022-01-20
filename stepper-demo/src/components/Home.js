@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Home.module.css";
 import "antd/dist/antd.css";
 import { Button } from "antd";
+import Steps from "./Steps";
+
 function Home() {
+  const [showSteps, setShowSteps] = useState(false);
+
+  const stepHandler = () => {
+    setShowSteps(true);
+  };
   return (
     <div>
       <div>
@@ -11,15 +18,11 @@ function Home() {
       <div className={classes.btn}>
         <input type="text" placeholder="Search" />
 
-        <Button
-          onClick={() => {
-            alert("hello");
-          }}
-          type="primary"
-        >
+        <Button onClick={stepHandler} type="primary">
           ADD
         </Button>
       </div>
+      {showSteps && <Steps />}
     </div>
   );
 }

@@ -5,14 +5,23 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import PersonalDetails from "./deatails/PersonalDetails";
+import BankDetails from "./deatails/BankDetails";
+import ProfessionalDetails from "./deatails/ProfessionalDetails";
+import CurrentStatus from "./deatails/CurrentStatus";
+import ExperienceDetails from "./deatails/ExperienceDetails";
+import EducationalDetails from "./deatails/EducationalDetails";
 
 const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
+  "Personal Details",
+  "Bank Details",
+  "Professional Details",
+  "Current Status",
+  "Experience Details",
+  "Educational Details",
 ];
 
-export default function Demo() {
+export default function Steps() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -64,11 +73,11 @@ export default function Demo() {
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+          // if (isStepOptional(index)) {
+          //   labelProps.optional = (
+          //     <Typography variant="caption">Optional</Typography>
+          //   );
+          // }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -91,7 +100,27 @@ export default function Demo() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            {(function () {
+              console.log(activeStep);
+              switch (activeStep) {
+                case 0:
+                  return <PersonalDetails />;
+                case 1:
+                  return <BankDetails />;
+                case 2:
+                  return <ProfessionalDetails />;
+                case 3:
+                  return <CurrentStatus />;
+                case 4:
+                  return <ExperienceDetails />;
+                case 5:
+                  return <EducationalDetails />;
+                default:
+                  break;
+              }
+            })()}
+          </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
@@ -101,12 +130,7 @@ export default function Demo() {
             >
               Back
             </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
+            <Box sx={{ flex: "1 1 auto" }} style={{ border: "1px" }} />
 
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
