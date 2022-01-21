@@ -1,38 +1,27 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Table, Button, Modal, FormControl } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Table, Button } from "react-bootstrap";
+import EditModel from "./EditModel";
+import ViewModel from "./ViewModel";
 
 function Display() {
-  const tableData = useSelector((state) => state);
-  const dispatch = useDispatch();
+  const tableData = useSelector((state) => {
+    return state.user;
+  });
+  const [modelType, setModelType] = useState("");
+  const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
 
-  const [show, setShow] = useState(false);
-  const [modelData, setModelData] = useState({});
-  const [viewData, setviewData] = useState({});
-  const [viewModel, setViewModel] = useState(false);
-  const [editModel, setEditModel] = useState(false);
-
-  const editDataHandler = (data) => {
-    setModelData(data);
-    console.log("mopdel data", modelData);
+  const editModelHandler = (index) => {
+    setSelectedUserIndex(index);
+    setModelType("editModel");
   };
 
-  const viewModelData = (data) => {
-    setviewData(data);
+  const viewModelHandler = (index) => {
+    setSelectedUserIndex(index);
+    setModelType("viewModel");
   };
-
-  const editModelHandler = (data) => {
-    editDataHandler(data);
-    setShow(true);
-    setEditModel(true);
-    setViewModel(false);
-  };
-
-  const viewModelHandler = (data) => {
-    viewModelData(data);
-    setShow(true);
-    setEditModel(false);
-    setViewModel(true);
+  const modelCloseHandler = () => {
+    setModelType("");
   };
   return (
     <div>
@@ -49,7 +38,7 @@ function Display() {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((data) => {
+          {tableData.map((data, index) => {
             return (
               <tr key={data.id}>
                 <td>{data.id}</td>
@@ -58,111 +47,40 @@ function Display() {
                 <td>{data.phone}</td>
                 <td>{data.date}</td>
                 <td>
-                  {
-                    <Button
-                      variant="primary"
-                      onClick={() => editModelHandler(data)}
-                    >
-                      Edit
-                    </Button>
-                  }
+                  <Button
+                    variant="primary"
+                    onClick={() => editModelHandler(index)}
+                  >
+                    Edit
+                  </Button>
                 </td>
                 <td>
-                  {
-                    <Button
-                      variant="primary"
-                      onClick={() => viewModelHandler(data)}
-                    >
-                      View
-                    </Button>
-                  }
+                  <Button
+                    variant="primary"
+                    onClick={() => viewModelHandler(index)}
+                  >
+                    View
+                  </Button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
-      {editModel && (
-        <Modal show={show}>
-          <Modal.Title>User Information Form</Modal.Title>
-          <Modal.Body>
-            <Modal.Header>Name</Modal.Header>
-            <FormControl
-              type="text"
-              value={modelData.name}
-              onChange={(e) => {
-                setModelData({ ...modelData, name: e.target.value });
-              }}
-            ></FormControl>
-            <Modal.Header>Email</Modal.Header>
-            <FormControl
-              type="text"
-              value={modelData.email}
-              onChange={(e) => {
-                setModelData({ ...modelData, email: e.target.value });
-              }}
-            ></FormControl>
-            <Modal.Header>Phone</Modal.Header>
-            <FormControl
-              type="text"
-              value={modelData.phone}
-              onChange={(e) => {
-                setModelData({ ...modelData, phone: e.target.value });
-              }}
-            ></FormControl>
-            <Modal.Header>DOB</Modal.Header>
-            <FormControl
-              type="date"
-              value={modelData.date}
-              onChange={(e) => {
-                setModelData({ ...modelData, date: e.target.value });
-              }}
-            ></FormControl>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              onClick={() => {
-                dispatch({ type: "EDIT_USER", payload: modelData });
-                setShow(false);
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              onClick={() => {
-                setShow(false);
-                setModelData({});
-              }}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+
+      {modelType === "editModel" && (
+        <EditModel
+          show={modelType === "editModel"}
+          closeModel={modelCloseHandler}
+          user={tableData[selectedUserIndex]}
+        />
       )}
-      {viewModel && (
-        <Modal show={show}>
-          <Modal.Title>User Information Form</Modal.Title>
-          <Modal.Body>
-            <Modal.Header>Name</Modal.Header>
-            <FormControl type="text" value={viewData.name}></FormControl>
-            <Modal.Header>Email</Modal.Header>
-            <FormControl type="text" value={viewData.email}></FormControl>
-            <Modal.Header>Phone</Modal.Header>
-            <FormControl type="text" value={viewData.phone}></FormControl>
-            <Modal.Header>DOB</Modal.Header>
-            <FormControl type="date" value={viewData.date}></FormControl>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              onClick={() => {
-                setShow(false);
-                setModelData({});
-              }}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+      {modelType === "viewModel" && (
+        <ViewModel
+          show={modelType === "viewModel"}
+          closeModel={modelCloseHandler}
+          user={tableData[selectedUserIndex]}
+        />
       )}
     </div>
   );

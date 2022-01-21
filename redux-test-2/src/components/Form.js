@@ -26,7 +26,6 @@ function Form() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log("form data", userInfo);
     dispatch({
       type: "ADD_USER",
       payload: { ...userInfo, id: Math.random().toString() },
@@ -38,7 +37,6 @@ function Form() {
   const closeModelHandler = () => {
     setShow(false);
   };
-
   return (
     <div>
       <Button variant="success" onClick={showModelHandler}>
@@ -56,14 +54,14 @@ function Form() {
           ></FormControl>
           <Modal.Header>Email</Modal.Header>
           <FormControl
-            type="text"
+            type="email"
             name="email"
             value={userInfo.email}
             onChange={changeHandler}
           ></FormControl>
           <Modal.Header>Phone</Modal.Header>
           <FormControl
-            type="text"
+            type="tel"
             name="phone"
             value={userInfo.phone}
             onChange={changeHandler}
