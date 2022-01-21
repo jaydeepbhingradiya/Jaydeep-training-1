@@ -5,7 +5,7 @@
 /redux-self-test/node_modules
 /redux-self-test/node_modules
 /.pnp
-.pnp.js
+.pnp.js    
 
 # testing
 /coverage
