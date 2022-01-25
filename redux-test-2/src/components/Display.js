@@ -5,9 +5,8 @@ import EditModel from "./EditModel";
 import ViewModel from "./ViewModel";
 
 function Display() {
-  const tableData = useSelector((state) => {
-    return state.user;
-  });
+  const tableData = useSelector((state) => state.user);
+
   const [modelType, setModelType] = useState("");
   const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
 
@@ -20,9 +19,11 @@ function Display() {
     setSelectedUserIndex(index);
     setModelType("viewModel");
   };
+
   const modelCloseHandler = () => {
     setModelType("");
   };
+
   return (
     <div>
       <Table striped bordered hover size="sm">
