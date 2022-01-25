@@ -69,7 +69,7 @@ export default function Steps() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={activeStep}>
+      <Stepper className="steps" activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -100,7 +100,7 @@ export default function Steps() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
+          <div className="step">
             {(function () {
               console.log(activeStep);
               switch (activeStep) {
@@ -120,7 +120,8 @@ export default function Steps() {
                   break;
               }
             })()}
-          </Typography>
+          </div>
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"

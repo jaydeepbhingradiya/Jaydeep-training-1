@@ -12,17 +12,21 @@ function Home() {
   };
   return (
     <div>
-      <div>
-        <h3 className={classes.title}>Albiorix Technology Team</h3>
-      </div>
-      <div className={classes.btn}>
-        <input type="text" placeholder="Search" />
+      {!showSteps && (
+        <div>
+          <div>
+            <h3 className={classes.title}>Albiorix Technology Team</h3>
+          </div>
+          <div className={classes.btn}>
+            <input type="text" placeholder="Search" />
 
-        <Button onClick={stepHandler} type="primary">
-          ADD
-        </Button>
-      </div>
-      {showSteps && <Steps />}
+            <Button onClick={stepHandler} type="primary">
+              ADD
+            </Button>
+          </div>
+        </div>
+      )}
+      <div>{showSteps && <Steps />}</div>
     </div>
   );
 }
