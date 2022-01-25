@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Table } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 function ViewModel({ show, closeModel, user }) {
   const modelCloseHandler = () => {
@@ -9,26 +9,16 @@ function ViewModel({ show, closeModel, user }) {
     <div>
       <Modal show={show}>
         <Modal.Title>User Information </Modal.Title>
-        <Modal.Body>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Number</th>
-                <th>Date Of Birth</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.date}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Modal.Body>
+        <div className="row">
+          <div className="col-md-10 p-5 mx-auto shadow">
+            <ul className="list-group">
+              <li className="list-group-item">{user.name}</li>
+              <li className="list-group-item">{user.email}</li>
+              <li className="list-group-item">{user.phone}</li>
+              <li className="list-group-item">{user.date}</li>
+            </ul>
+          </div>
+        </div>
         <Modal.Footer>
           <Button onClick={modelCloseHandler}>Close</Button>
         </Modal.Footer>
