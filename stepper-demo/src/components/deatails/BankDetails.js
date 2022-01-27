@@ -1,34 +1,46 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 
-function BankDetails() {
+function BankDetails({ handleChange, person }) {
   return (
-    <div>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "100%" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div className="App">
-          <h2>Bank Details</h2>
-        </div>
-        <div>
-          <TextField label="Account Number" variant="filled" />
-        </div>
-        <div>
-          <TextField label="IFSC" variant="filled" />
-        </div>
-        <div>
-          <TextField label="PAN Card Number" variant="filled" />
-        </div>
-        <div>
-          <TextField label="Adhar Card Number" variant="filled" />
-        </div>
-      </Box>
-    </div>
+    <Box
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "90%" },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div className="App">
+        <Typography variant="h4">Bank Details</Typography>
+      </div>
+      <div>
+        <TextField
+          name="accountNumber"
+          label="Account Number"
+          defaultValue={person.accountNumber}
+          onChange={handleChange}
+        />
+        <TextField
+          name="ifsc"
+          onChange={handleChange}
+          label="IFSC"
+          defaultValue={person.ifsc}
+        />
+        <TextField
+          name="pancardNumber"
+          label="PAN Card Number"
+          defaultValue={person.pancardNumber}
+          onChange={handleChange}
+        />
+        <TextField
+          name="adharcardNumber"
+          label="Adhar Card Number"
+          defaultValue={person.adharcardNumber}
+          onChange={handleChange}
+        />
+      </div>
+    </Box>
   );
 }
 

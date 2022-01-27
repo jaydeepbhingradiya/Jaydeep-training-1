@@ -22,12 +22,12 @@ const MenuProps = {
 const names = [
   "Javascript",
   "React JS",
-  "PHP",
-  "Java ",
-  " MySQL",
   "Angular JS",
-  "Python",
   "Node JS",
+  " MySQL",
+  "Java ",
+  "Python",
+  "PHP",
 ];
 
 function getStyles(name, personName, theme) {
@@ -39,15 +39,12 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip() {
+export default function MultipleSelectChip({ onchange, skills }) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
+    onchange(event);
   };
 
   return (
@@ -55,10 +52,11 @@ export default function MultipleSelectChip() {
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-chip-label">Skills</InputLabel>
         <Select
+          name="skills"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={skills}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (

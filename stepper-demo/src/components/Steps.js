@@ -1,10 +1,12 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+import {
+  Button,
+  Typography,
+  Step,
+  StepLabel,
+  Stepper,
+  Box,
+} from "@mui/material";
 import PersonalDetails from "./deatails/PersonalDetails";
 import BankDetails from "./deatails/BankDetails";
 import ProfessionalDetails from "./deatails/ProfessionalDetails";
@@ -21,13 +23,29 @@ const steps = [
   "Educational Details",
 ];
 
-export default function Steps() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
+const details = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: "",
+  dateOfBirth: "",
+  accountNumber: "",
+  ifsc: "",
+  pancardNumber: "",
+  adharcardNumber: "",
+  totalmonthofExperience: "",
+  totalYearofExperience: "",
+  currentDesignation: "",
+  currentDepartment: "",
+  currentCTC: "",
+  startWorkingFrom: "",
+  skills: [],
+};
 
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
+export default function Steps() {
+  const [person, setPeroson] = useState(details);
+  const [activeStep, setActiveStep] = useState(0);
+  const [skipped, setSkipped] = useState(new Set());
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -48,23 +66,14 @@ export default function Steps() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
+  };
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    person[name] = value;
+    setPeroson(person);
   };
 
   return (
@@ -73,11 +82,7 @@ export default function Steps() {
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
-          // if (isStepOptional(index)) {
-          //   labelProps.optional = (
-          //     <Typography variant="caption">Optional</Typography>
-          //   );
-          // }
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -105,17 +110,44 @@ export default function Steps() {
               console.log(activeStep);
               switch (activeStep) {
                 case 0:
-                  return <PersonalDetails />;
+                  return (
+                    <PersonalDetails
+                      handleChange={handleChange}
+                      person={person}
+                    />
+                  );
                 case 1:
-                  return <BankDetails />;
+                  return (
+                    <BankDetails handleChange={handleChange} person={person} />
+                  );
                 case 2:
-                  return <ProfessionalDetails />;
+                  return (
+                    <ProfessionalDetails
+                      handleChange={handleChange}
+                      person={person}
+                    />
+                  );
                 case 3:
-                  return <CurrentStatus />;
+                  return (
+                    <CurrentStatus
+                      handleChange={handleChange}
+                      person={person}
+                    />
+                  );
                 case 4:
-                  return <ExperienceDetails />;
+                  return (
+                    <ExperienceDetails
+                      handleChange={handleChange}
+                      person={person}
+                    />
+                  );
                 case 5:
-                  return <EducationalDetails />;
+                  return (
+                    <EducationalDetails
+                      handleChange={handleChange}
+                      person={person}
+                    />
+                  );
                 default:
                   break;
               }

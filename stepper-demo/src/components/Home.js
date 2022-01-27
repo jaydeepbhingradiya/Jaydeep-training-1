@@ -3,6 +3,7 @@ import classes from "./Home.module.css";
 import "antd/dist/antd.css";
 import { Button } from "antd";
 import Steps from "./Steps";
+import { Typography } from "@mui/material";
 
 function Home() {
   const [showSteps, setShowSteps] = useState(false);
@@ -11,11 +12,13 @@ function Home() {
     setShowSteps(true);
   };
   return (
-    <div>
+    <React.Fragment>
       {!showSteps && (
         <div>
           <div>
-            <h3 className={classes.title}>Albiorix Technology Team</h3>
+            <Typography className={classes.title} variant="h4">
+              Albiorix Technology Team
+            </Typography>
           </div>
           <div className={classes.btn}>
             <input type="text" placeholder="Search" />
@@ -27,7 +30,7 @@ function Home() {
         </div>
       )}
       <div>{showSteps && <Steps />}</div>
-    </div>
+    </React.Fragment>
   );
 }
 

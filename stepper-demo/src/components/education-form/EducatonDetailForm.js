@@ -1,34 +1,31 @@
-import { Box, TextField } from "@mui/material";
 import React from "react";
+import { Box, TextField, Paper, Button } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 function EducatonDetailForm() {
   return (
-    <div>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "80%" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div className="App">
-          <div>
-            <TextField label="Course" variant="filled" />
-          </div>
-          <div>
-            <TextField label="Univercity" variant="filled" />
-          </div>
-
-          <div>
-            <TextField type="date" label=" Pass on" variant="filled" />
-          </div>
-          <div>
-            <TextField label=" Grade" variant="filled" />
-          </div>
+    <Box
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "80%" },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <Paper className="paper" elevation={3}>
+        <div className="cls-btn">
+          <Button>
+            <CancelIcon sx={{ color: "red" }} />
+          </Button>
         </div>
-      </Box>
-    </div>
+        <div className="App">
+          <TextField label="Course" />
+          <TextField label="Univercity" />
+          <TextField type="date" label=" Pass on" />
+          <TextField label=" Grade" />
+        </div>
+      </Paper>
+    </Box>
   );
 }
 

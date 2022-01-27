@@ -14,6 +14,15 @@
 .profile {
   width: 30%;
 }
+.paper {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+.cls-btn {
+  text-align: right;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
