@@ -1,5 +1,5 @@
-import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
+import { Box, TextField, Typography } from "@mui/material";
 
 function BankDetails({ handleChange, person }) {
   return (
@@ -9,7 +9,7 @@ function BankDetails({ handleChange, person }) {
         "& .MuiTextField-root": { m: 1, width: "90%" },
       }}
       noValidate
-      autoComplete="off"
+      // autoComplete="off"
     >
       <div className="App">
         <Typography variant="h4">Bank Details</Typography>

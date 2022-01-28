@@ -1,5 +1,5 @@
-import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
+import { Box, TextField, Typography } from "@mui/material";
 import MultipleSelectChip from "../multipleselectchip/MultipleSelectChip";
 
 function ProfessionalDetails({ handleChange, person }) {
@@ -10,7 +10,7 @@ function ProfessionalDetails({ handleChange, person }) {
         "& .MuiTextField-root": { m: 1, width: "45%" },
       }}
       noValidate
-      autoComplete="off"
+      // autoComplete="off"
     >
       <div className="App">
         <Typography variant="h4">Professional Details</Typography>

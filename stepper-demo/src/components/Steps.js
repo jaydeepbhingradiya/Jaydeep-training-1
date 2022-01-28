@@ -40,26 +40,16 @@ const details = {
   currentCTC: "",
   startWorkingFrom: "",
   skills: [],
+  experienceDetails: [],
+  educationalDetails: [],
 };
 
-export default function Steps() {
+function Steps() {
   const [person, setPeroson] = useState(details);
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
@@ -73,19 +63,16 @@ export default function Steps() {
   const handleChange = (e) => {
     const { value, name } = e.target;
     person[name] = value;
-    setPeroson(person);
+    setPeroson({ ...person });
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper className="steps" activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
 
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -107,7 +94,6 @@ export default function Steps() {
         <React.Fragment>
           <div className="step">
             {(function () {
-              console.log(activeStep);
               switch (activeStep) {
                 case 0:
                   return (
@@ -174,3 +160,4 @@ export default function Steps() {
     </Box>
   );
 }
+export default Steps;

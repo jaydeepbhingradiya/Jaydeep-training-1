@@ -1,12 +1,14 @@
-import * as React from "react";
+import React from "react";
 import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
+import {
+  Box,
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Chip,
+} from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,9 +41,9 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelectChip({ onchange, skills }) {
+function MultipleSelectChip({ onchange, skills }) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName] = React.useState([]);
 
   const handleChange = (event) => {
     onchange(event);
@@ -61,9 +63,8 @@ export default function MultipleSelectChip({ onchange, skills }) {
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
+              {selected &&
+                selected.map((value) => <Chip key={value} label={value} />)}
             </Box>
           )}
           MenuProps={MenuProps}
@@ -82,3 +83,4 @@ export default function MultipleSelectChip({ onchange, skills }) {
     </div>
   );
 }
+export default MultipleSelectChip;

@@ -9,7 +9,7 @@ function CurrentStatus({ handleChange, person }) {
         "& .MuiTextField-root": { m: 1, width: "90%" },
       }}
       noValidate
-      autoComplete="off"
+      // autoComplete="off"
     >
       <div className="App">
         <Typography variant="h4">Current Status </Typography>
@@ -45,6 +45,9 @@ function CurrentStatus({ handleChange, person }) {
           onChange={handleChange}
           defaultValue={person.startWorkingFrom}
           label="Working From"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </div>
     </Box>

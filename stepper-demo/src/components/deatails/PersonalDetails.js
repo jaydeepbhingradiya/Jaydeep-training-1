@@ -18,35 +18,38 @@ function PersonalDetails({ handleChange, person }) {
       </div>
       <div>
         <TextField
-          name="firstNaame"
-          defaultValue={person.firstName}
+          name="firstName"
           onChange={handleChange}
+          defaultValue={person.firstName}
           label="First Name"
         />
         <TextField
-          name="lastNaame"
-          defaultValue={person.lastName}
+          name="lastName"
           onChange={handleChange}
+          defaultValue={person.lastName}
           label="Last Name"
         />
         <TextField
           name="phoneNumber"
-          defaultValue={person.phoneNumber}
           onChange={handleChange}
+          defaultValue={person.phoneNumber}
           label="Phone"
         />
         <TextField
           name="email"
-          defaultValue={person.email}
           onChange={handleChange}
+          defaultValue={person.email}
           label="Email"
         />
         <TextField
-          name="dateofBirth"
+          name="dateOfBirth"
           onChange={handleChange}
           defaultValue={person.dateOfBirth}
           type="date"
           label="Date of Birth"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </div>
     </Box>

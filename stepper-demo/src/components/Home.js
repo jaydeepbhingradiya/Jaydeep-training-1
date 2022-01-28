@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Home.module.css";
-import "antd/dist/antd.css";
-import { Button } from "antd";
+import { Typography, Button } from "@mui/material";
 import Steps from "./Steps";
-import { Typography } from "@mui/material";
 
 function Home() {
   const [showSteps, setShowSteps] = useState(false);
@@ -23,7 +21,7 @@ function Home() {
           <div className={classes.btn}>
             <input type="text" placeholder="Search" />
 
-            <Button onClick={stepHandler} type="primary">
+            <Button variant="contained" onClick={stepHandler}>
               ADD
             </Button>
           </div>

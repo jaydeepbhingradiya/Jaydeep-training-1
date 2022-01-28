@@ -1,5 +1,4 @@
 import "./App.css";
-import "antd/dist/antd.css";
 import Home from "./components/Home";
 import List from "./components/List";
 import React from "react";
