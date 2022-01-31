@@ -9,7 +9,7 @@ function EducatonDetailForm({
   handleChange,
 }) {
   const removeFormHandler = () => {
-    removeForm();
+    removeForm(index);
   };
 
   return (
@@ -51,6 +51,9 @@ function EducatonDetailForm({
             defaultValue={educationalDetails.educationPassOut}
             onChange={(e) => {
               handleChange(index, "previousCompanyName", e.target.value);
+            }}
+            InputLabelProps={{
+              shrink: true,
             }}
           />
           <TextField

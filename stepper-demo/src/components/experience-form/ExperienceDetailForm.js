@@ -9,7 +9,7 @@ function ExperienceDetailForm({
   index,
 }) {
   const removeFormHandler = () => {
-    removeForm();
+    removeForm(index);
   };
   return (
     <Box

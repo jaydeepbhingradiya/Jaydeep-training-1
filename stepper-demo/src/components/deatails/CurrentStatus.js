@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 
-function CurrentStatus({ handleChange, person }) {
+function CurrentStatus({ handleChange, person, errors }) {
   return (
     <Box
       component="form"
@@ -25,12 +25,16 @@ function CurrentStatus({ handleChange, person }) {
           name="currentDesignation"
           defaultValue={person.currentDesignation}
           onChange={handleChange}
+          error={!!errors.currentDesignation}
+          helperText={errors.currentDesignation}
         />
         <TextField
           label="Department"
           name="currentDepartment"
           onChange={handleChange}
           defaultValue={person.currentDepartment}
+          error={!!errors.currentDepartment}
+          helperText={errors.currentDepartment}
         />
         <TextField
           type="number"
@@ -38,6 +42,8 @@ function CurrentStatus({ handleChange, person }) {
           onChange={handleChange}
           defaultValue={person.currentCTC}
           label="CTC"
+          error={!!errors.currentCTC}
+          helperText={errors.currentCTC}
         />
         <TextField
           type="date"
@@ -45,6 +51,8 @@ function CurrentStatus({ handleChange, person }) {
           onChange={handleChange}
           defaultValue={person.startWorkingFrom}
           label="Working From"
+          error={!!errors.startWorkingFrom}
+          helperText={errors.startWorkingFrom}
           InputLabelProps={{
             shrink: true,
           }}

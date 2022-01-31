@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import MultipleSelectChip from "../multipleselectchip/MultipleSelectChip";
 
-function ProfessionalDetails({ handleChange, person }) {
+function ProfessionalDetails({ handleChange, person, errors }) {
+  const [profileImg, setProfileImg] = useState("");
+  const [loadDone, setLoadDone] = useState(false);
+
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setLoadDone(reader.readyState === 2);
+        setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <Box
       component="form"
@@ -14,8 +28,16 @@ function ProfessionalDetails({ handleChange, person }) {
     >
       <div className="App">
         <Typography variant="h4">Professional Details</Typography>
-        <Typography variant="h5">Resume</Typography>
-        <TextField type="file" style={{ width: "20%" }} />
+        {loadDone && <img className="cv" alt="resume" src={profileImg} />}
+
+        <Typography variant="h6">Resume</Typography>
+        <TextField
+          type="file"
+          style={{ width: "20%" }}
+          inputProps={{ accept: "application/pdf" }}
+          name="resume-upload"
+          onChange={imageHandler}
+        />
       </div>
       <div>
         <p>Total Experienace</p>
@@ -25,6 +47,8 @@ function ProfessionalDetails({ handleChange, person }) {
           label="Year"
           defaultValue={person.totalYearofExperience}
           onChange={handleChange}
+          error={!!errors.totalYearofExperience}
+          helperText={errors.totalYearofExperience}
         />
         <TextField
           type="number"
@@ -32,10 +56,16 @@ function ProfessionalDetails({ handleChange, person }) {
           label="Months"
           defaultValue={person.totalmonthofExperience}
           onChange={handleChange}
+          error={!!errors.totalmonthofExperience}
+          helperText={errors.totalmonthofExperience}
         />
       </div>
       <div>
-        <MultipleSelectChip onchange={handleChange} skills={person.skills} />
+        <MultipleSelectChip
+          onchange={handleChange}
+          skills={person.skills}
+          errors={errors.skills}
+        />
       </div>
     </Box>
   );

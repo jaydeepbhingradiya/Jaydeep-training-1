@@ -4,7 +4,7 @@
 .step {
   margin-top: 1rem;
   margin-left: 2rem;
-  margin-right: brem;
+  margin-right: 1rem;
 }
 .steps {
   margin-top: 2rem;
@@ -26,6 +26,14 @@
 .skills {
   margin-left: 10px;
   width: 91%;
+}
+.img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.cv {
+  width: 15%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -41,7 +41,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-function MultipleSelectChip({ onchange, skills }) {
+function MultipleSelectChip({ onchange, skills, errors }) {
   const theme = useTheme();
   const [personName] = React.useState([]);
 
@@ -60,6 +60,8 @@ function MultipleSelectChip({ onchange, skills }) {
           multiple
           value={skills}
           onChange={handleChange}
+          error={!!errors}
+          helperText={errors}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>

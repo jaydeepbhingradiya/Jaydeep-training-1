@@ -13,6 +13,12 @@ import ProfessionalDetails from "./deatails/ProfessionalDetails";
 import CurrentStatus from "./deatails/CurrentStatus";
 import ExperienceDetails from "./deatails/ExperienceDetails";
 import EducationalDetails from "./deatails/EducationalDetails";
+import {
+  bankDetails,
+  currentStatus,
+  personalDetails,
+  professionalDetails,
+} from "./helper/validate";
 
 const steps = [
   "Personal Details",
@@ -33,27 +39,41 @@ const details = {
   ifsc: "",
   pancardNumber: "",
   adharcardNumber: "",
-  totalmonthofExperience: "",
   totalYearofExperience: "",
+  totalmonthofExperience: "",
+  skills: [],
   currentDesignation: "",
   currentDepartment: "",
   currentCTC: "",
   startWorkingFrom: "",
-  skills: [],
   experienceDetails: [],
   educationalDetails: [],
 };
 
 function Steps() {
   const [person, setPeroson] = useState(details);
+  const [formErrors, setFormErrors] = useState({});
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    let errors = {};
+    let validators = [
+      personalDetails,
+      bankDetails,
+      professionalDetails,
+      currentStatus,
+    ];
+
+    errors = validators[activeStep](person);
+
+    if (errors.isValid) {
+      setActiveStep(activeStep + 1);
+    }
+    setFormErrors(errors.errors);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep(activeStep - 1);
   };
 
   const handleReset = () => {
@@ -62,8 +82,15 @@ function Steps() {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    person[name] = value;
-    setPeroson({ ...person });
+    let curState = { ...person };
+    curState[name] = value;
+
+    setPeroson(curState);
+    // person[name] = value;
+    // setPeroson({ ...person });
+
+    let personalRespone = personalDetails(person);
+    setFormErrors(personalRespone.errors);
   };
 
   return (
@@ -100,17 +127,23 @@ function Steps() {
                     <PersonalDetails
                       handleChange={handleChange}
                       person={person}
+                      errors={formErrors}
                     />
                   );
                 case 1:
                   return (
-                    <BankDetails handleChange={handleChange} person={person} />
+                    <BankDetails
+                      handleChange={handleChange}
+                      person={person}
+                      errors={formErrors}
+                    />
                   );
                 case 2:
                   return (
                     <ProfessionalDetails
                       handleChange={handleChange}
                       person={person}
+                      errors={formErrors}
                     />
                   );
                 case 3:
@@ -118,6 +151,7 @@ function Steps() {
                     <CurrentStatus
                       handleChange={handleChange}
                       person={person}
+                      errors={formErrors}
                     />
                   );
                 case 4:
@@ -140,7 +174,14 @@ function Steps() {
             })()}
           </div>
 
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              pt: 2,
+              mx: "1rem",
+            }}
+          >
             <Button
               color="inherit"
               disabled={activeStep === 0}

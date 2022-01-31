@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import ExperienceDetailForm from "./../experience-form/ExperienceDetailForm";
 
 function ExperienceDetails({ handleChange, person }) {
-  const [count, setCount] = useState(0);
-
   const addExperienceHandler = () => {
-    setCount(count + 1);
     let curExpList = [...person.experienceDetails, {}];
+
     handleChange({
       target: { name: "experienceDetails", value: curExpList },
     });
   };
 
-  const removeFormHandler = () => {
-    setCount(count - 1);
+  const removeFormHandler = (index) => {
+    person.experienceDetails.splice(index, 1);
+
+    handleChange({
+      target: { name: "experienceDetails", value: person.experienceDetails },
+    });
   };
 
   const handleChange2 = (index, name, value) => {
@@ -22,6 +24,7 @@ function ExperienceDetails({ handleChange, person }) {
     currExp[name] = value;
     let expList = [...person.experienceDetails];
     expList[index] = currExp;
+
     handleChange({
       target: {
         name: "experienceDetails",

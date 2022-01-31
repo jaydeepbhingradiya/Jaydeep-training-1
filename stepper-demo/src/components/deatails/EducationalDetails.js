@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import EducatonDetailForm from "./../education-form/EducatonDetailForm";
 
 function EducationalDetails({ person, handleChange }) {
-  const [count, setCount] = useState(0);
-
   const addEducationHandler = () => {
-    setCount(count + 1);
     let curEduList = [...person.educationalDetails, {}];
     handleChange({
       target: { name: "educationalDetails", value: curEduList },
@@ -26,8 +23,12 @@ function EducationalDetails({ person, handleChange }) {
     });
   };
 
-  const removeFormHandler = () => {
-    setCount(count - 1);
+  const removeFormHandler = (index) => {
+    person.educationalDetails.splice(index, 1);
+
+    handleChange({
+      target: { name: "educationalDetails", value: person.educationalDetails },
+    });
   };
 
   return (
