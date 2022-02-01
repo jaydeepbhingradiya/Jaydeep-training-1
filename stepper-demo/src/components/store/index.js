@@ -2,7 +2,7 @@ import { createStore } from "redux";
 
 const formDetailReducer = (state = { person: {} }, action) => {
   switch (action.type) {
-    case "PERSONAL_DETAILS":
+    case "ADD_PERSON":
       return { ...state, person: { ...action.payload } };
 
     default:

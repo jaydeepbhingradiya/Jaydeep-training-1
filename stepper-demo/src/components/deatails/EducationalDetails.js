@@ -2,9 +2,10 @@ import React from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import EducatonDetailForm from "./../education-form/EducatonDetailForm";
 
-function EducationalDetails({ person, handleChange }) {
+function EducationalDetails({ person, handleChange, errors }) {
   const addEducationHandler = () => {
     let curEduList = [...person.educationalDetails, {}];
+
     handleChange({
       target: { name: "educationalDetails", value: curEduList },
     });
@@ -31,6 +32,13 @@ function EducationalDetails({ person, handleChange }) {
     });
   };
 
+  let getError = (index) => {
+    if (index >= errors.educationalDetails.length) {
+      return {};
+    }
+    return errors.educationalDetails[index];
+  };
+
   return (
     <Box
       component="form"
@@ -41,7 +49,7 @@ function EducationalDetails({ person, handleChange }) {
       // autoComplete="off"
     >
       <div className="App">
-        <Typography variant="h4">Educaton Details </Typography>
+        <Typography variant="h4">Education Details </Typography>
       </div>
       <div>
         {(function () {
@@ -51,6 +59,7 @@ function EducationalDetails({ person, handleChange }) {
               <EducatonDetailForm
                 index={i}
                 key={i}
+                errors={getError(i)}
                 removeForm={removeFormHandler}
                 handleChange={handleChange2}
                 educationalDetails={person.educationalDetails[i] || {}}
@@ -64,7 +73,7 @@ function EducationalDetails({ person, handleChange }) {
         <Button onClick={addEducationHandler}>
           <Icon baseClassName="fas" className="fa-plus-circle" />
         </Button>
-        Add New Experience
+        Add New Education
       </div>
     </Box>
   );

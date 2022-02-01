@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Typography,
@@ -16,6 +17,8 @@ import EducationalDetails from "./deatails/EducationalDetails";
 import {
   bankDetails,
   currentStatus,
+  educationalDetails,
+  experienceDetails,
   personalDetails,
   professionalDetails,
 } from "./helper/validate";
@@ -51,8 +54,12 @@ const details = {
 };
 
 function Steps() {
+  const dispatch = useDispatch();
   const [person, setPeroson] = useState(details);
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({
+    experienceDetails: [],
+    educationalDetails: [],
+  });
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -62,14 +69,18 @@ function Steps() {
       bankDetails,
       professionalDetails,
       currentStatus,
+      experienceDetails,
+      educationalDetails,
     ];
 
     errors = validators[activeStep](person);
 
-    if (errors.isValid) {
+    if (errors.isValid && activeStep === steps.length - 1) {
+      dispatch({ type: "ADD_PERSON", payload: person });
+    } else if (errors.isValid && activeStep < steps.length) {
       setActiveStep(activeStep + 1);
     }
-    setFormErrors(errors.errors);
+    setFormErrors(errors);
   };
 
   const handleBack = () => {
@@ -89,8 +100,22 @@ function Steps() {
     // person[name] = value;
     // setPeroson({ ...person });
 
-    let personalRespone = personalDetails(person);
-    setFormErrors(personalRespone.errors);
+    // let errors = {};
+    // let validators = [
+    //   personalDetails,
+    //   bankDetails,
+    //   professionalDetails,
+    //   currentStatus,
+    //   experienceDetails,
+    //   educationalDetails,
+    // ];
+
+    // errors = validators[activeStep](person);
+
+    // if (!errors.isValid) {
+    //   // setActiveStep(activeStep + 1);
+    //   setFormErrors(errors.errors);
+    // }
   };
 
   return (
@@ -159,6 +184,7 @@ function Steps() {
                     <ExperienceDetails
                       handleChange={handleChange}
                       person={person}
+                      errors={formErrors}
                     />
                   );
                 case 5:
@@ -166,6 +192,7 @@ function Steps() {
                     <EducationalDetails
                       handleChange={handleChange}
                       person={person}
+                      errors={formErrors}
                     />
                   );
                 default:
@@ -193,7 +220,7 @@ function Steps() {
             <Box sx={{ flex: "1 1 auto" }} style={{ border: "1px" }} />
 
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? "Submit" : "Next"}
             </Button>
           </Box>
         </React.Fragment>

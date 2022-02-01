@@ -35,6 +35,13 @@
 .cv {
   width: 15%;
 }
+.chip p {
+  color: rgb(202, 24, 24);
+  font-size: small;
+  margin-top: -5px;
+  margin-left: 19px;
+  /* padding-top: -10px; */
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

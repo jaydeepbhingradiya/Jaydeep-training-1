@@ -41,27 +41,27 @@ function getStyles(name, personName, theme) {
   };
 }
 
-function MultipleSelectChip({ onchange, skills, errors }) {
+function MultipleSelectChip({ onchange, skills, ...errors }) {
   const theme = useTheme();
   const [personName] = React.useState([]);
 
   const handleChange = (event) => {
     onchange(event);
   };
-
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-chip-label">Skills</InputLabel>
         <Select
+          required
           name="skills"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
           value={skills}
           onChange={handleChange}
-          error={!!errors}
-          helperText={errors}
+          error={!!errors.skills}
+          helperText={errors.skills}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>

@@ -2,20 +2,12 @@ import React from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import ExperienceDetailForm from "./../experience-form/ExperienceDetailForm";
 
-function ExperienceDetails({ handleChange, person }) {
+function ExperienceDetails({ handleChange, person, errors }) {
   const addExperienceHandler = () => {
     let curExpList = [...person.experienceDetails, {}];
 
     handleChange({
       target: { name: "experienceDetails", value: curExpList },
-    });
-  };
-
-  const removeFormHandler = (index) => {
-    person.experienceDetails.splice(index, 1);
-
-    handleChange({
-      target: { name: "experienceDetails", value: person.experienceDetails },
     });
   };
 
@@ -33,6 +25,20 @@ function ExperienceDetails({ handleChange, person }) {
     });
   };
 
+  const removeFormHandler = (index) => {
+    person.experienceDetails.splice(index, 1);
+
+    handleChange({
+      target: { name: "experienceDetails", value: person.experienceDetails },
+    });
+  };
+
+  let getError = (index) => {
+    if (index >= errors.experienceDetails.length) {
+      return {};
+    }
+    return errors.experienceDetails[index];
+  };
   return (
     <Box
       component="form"
@@ -51,6 +57,11 @@ function ExperienceDetails({ handleChange, person }) {
           for (let i = 0; i < person.experienceDetails.length; i++) {
             experienceForm.push(
               <ExperienceDetailForm
+                errors={getError(i)}
+                // errors={
+                //   (errors.experienceDetails && errors.experienceDetails[i]) ||
+                //   {}
+                // }
                 index={i}
                 key={i}
                 removeForm={removeFormHandler}
@@ -61,6 +72,21 @@ function ExperienceDetails({ handleChange, person }) {
           }
           return experienceForm;
         })()}
+
+        {/* {person.experienceDetails &&
+          person.experienceDetails.map((experienceDetail, index) => (
+            <ExperienceDetailForm
+              index={index}
+              key={index}
+              removeForm={removeFormHandler}
+              handleChange={handleChange2}
+              experienceDetails={experienceDetail}
+              errors={
+                (errors.experienceDetails && errors.experienceDetails[index]) ||
+                {}
+              }
+            />
+          ))} */}
       </div>
       ;
       <div className="App">

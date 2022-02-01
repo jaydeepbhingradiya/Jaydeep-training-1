@@ -60,12 +60,9 @@ function ProfessionalDetails({ handleChange, person, errors }) {
           helperText={errors.totalmonthofExperience}
         />
       </div>
-      <div>
-        <MultipleSelectChip
-          onchange={handleChange}
-          skills={person.skills}
-          errors={errors.skills}
-        />
+      <div className="chip">
+        <MultipleSelectChip onchange={handleChange} skills={person.skills} />
+        {!!errors.skills && <p>{errors.skills}</p>}
       </div>
     </Box>
   );
