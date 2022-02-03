@@ -23,7 +23,8 @@ function CurrentStatus({ handleChange, person, errors }) {
         <TextField
           label="Designation"
           name="currentDesignation"
-          defaultValue={person.currentDesignation}
+          // defaultValue={person.currentDesignation}
+          defaultValue="trainee"
           onChange={handleChange}
           error={!!errors.currentDesignation}
           helperText={errors.currentDesignation}
@@ -32,7 +33,8 @@ function CurrentStatus({ handleChange, person, errors }) {
           label="Department"
           name="currentDepartment"
           onChange={handleChange}
-          defaultValue={person.currentDepartment}
+          // defaultValue={person.currentDepartment}
+          defaultValue="IT"
           error={!!errors.currentDepartment}
           helperText={errors.currentDepartment}
         />

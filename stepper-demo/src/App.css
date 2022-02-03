@@ -43,6 +43,10 @@
   /* padding-top: -10px; */
 }
 
+.table {
+  margin: 1rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -42,7 +42,8 @@ function PersonalDetails({ handleChange, person, errors }) {
         <TextField
           name="firstName"
           onChange={handleChange}
-          defaultValue={person.firstName}
+          // defaultValue={person.firstName}
+          defaultValue="jaydeep"
           label="First Name"
           error={!!errors.firstName}
           helperText={errors.firstName}
