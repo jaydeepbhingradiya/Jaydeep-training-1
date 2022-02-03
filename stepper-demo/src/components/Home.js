@@ -6,6 +6,11 @@ import List from "./List";
 
 function Home() {
   const [showSteps, setShowSteps] = useState(false);
+  const [selectedData, setSelectedDate] = useState({
+    skills: [],
+    experienceDetails: [],
+    educationalDetails: [],
+  });
 
   const stepHandler = () => {
     setShowSteps(true);
@@ -13,6 +18,12 @@ function Home() {
 
   const showListHandler = () => {
     setShowSteps(false);
+  };
+  const hideListHandler = () => {
+    setShowSteps(true);
+  };
+  const selectedDataHandler = (data) => {
+    setSelectedDate(data);
   };
   return (
     <React.Fragment>
@@ -30,11 +41,18 @@ function Home() {
             </Button>
           </div>
           <div className="table">
-            <List />
+            <List
+              getselectedData={selectedDataHandler}
+              showList={hideListHandler}
+            />
           </div>
         </div>
       )}
-      <div>{showSteps && <Steps showList={showListHandler} />}</div>
+      <div>
+        {showSteps && (
+          <Steps selectData={selectedData} showList={showListHandler} />
+        )}
+      </div>
     </React.Fragment>
   );
 }

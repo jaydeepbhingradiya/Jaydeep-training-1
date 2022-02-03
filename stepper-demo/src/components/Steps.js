@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Step, StepLabel, Stepper, Box } from "@mui/material";
 import PersonalDetails from "./deatails/PersonalDetails";
 import BankDetails from "./deatails/BankDetails";
@@ -30,9 +30,10 @@ const details = {
   experienceDetails: [],
   educationalDetails: [],
 };
-
-function Steps({ showList }) {
+let id = Math.random().toString();
+function Steps({ showList, selectData }) {
   const dispatch = useDispatch();
+  const length = useSelector((state) => state.selectedPerson.length);
   const [person, setPeroson] = useState(details);
   const [formErrors, setFormErrors] = useState({
     experienceDetails: [],
@@ -40,16 +41,24 @@ function Steps({ showList }) {
   });
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = () => {
-    if (activeStep === 5) {
-      dispatch({
-        type: "ADD_PERSON",
-        payload: { ...person, id: Math.random().toString() },
-      });
-      showList();
+  const handleSubmit = () => {
+    debugger;
+
+    let ttype = "UPDATE_PERSON";
+
+    if (!person.id) {
+      person.id = id;
+      ttype = "ADD_PERSON";
     }
 
-    setActiveStep(activeStep + 1);
+    if (activeStep === 5) {
+      dispatch({
+        type: ttype,
+        payload: person,
+      });
+
+      showList();
+    }
 
     // let errors = {};
     // let validators = [
@@ -70,6 +79,11 @@ function Steps({ showList }) {
     // }
     // setFormErrors(errors);
   };
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -104,7 +118,6 @@ function Steps({ showList }) {
     //   setFormErrors(errors.errors);
     // }
   };
-
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper className="steps" activeStep={activeStep}>
@@ -130,6 +143,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               case 1:
@@ -138,6 +152,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               case 2:
@@ -146,6 +161,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               case 3:
@@ -154,6 +170,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               case 4:
@@ -162,6 +179,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               case 5:
@@ -170,6 +188,7 @@ function Steps({ showList }) {
                     handleChange={handleChange}
                     person={person}
                     errors={formErrors}
+                    selectData={selectData}
                   />
                 );
               default:
@@ -187,6 +206,7 @@ function Steps({ showList }) {
           }}
         >
           <Button
+            variant="contained"
             color="inherit"
             disabled={activeStep === 0}
             onClick={handleBack}
@@ -198,13 +218,27 @@ function Steps({ showList }) {
           <Button
             color="inherit"
             onClick={exithandler}
-            sx={{ mr: 1, color: "red" }}
+            sx={{ mr: 1, bgcolor: "red", color: "white" }}
           >
             exit
           </Button>
+          <Box sx={{ flex: "1 1 auto" }} style={{ border: "1px" }} />
 
-          <Button onClick={handleNext}>
-            {activeStep === steps.length - 1 ? "Submit" : "Next"}
+          <Button
+            variant="contained"
+            disabled={activeStep < 5}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+          <Box sx={{ flex: "1 1 auto" }} style={{ border: "1px" }} />
+
+          <Button
+            variant="contained"
+            disabled={activeStep === 5}
+            onClick={handleNext}
+          >
+            Next
           </Button>
         </Box>
       </React.Fragment>

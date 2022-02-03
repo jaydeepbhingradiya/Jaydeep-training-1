@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,16 +13,18 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector, useDispatch } from "react-redux";
 
-function List() {
+function List({ getselectedData, showList }) {
   const dispatch = useDispatch();
-  const person = useSelector((state) => state);
-
+  const person = useSelector((state) => state.person);
   const deletePersonHandler = (id) => {
     dispatch({ type: "REMOVE_PERSON", payload: id });
   };
 
   const editPersonHandler = (data) => {
     dispatch({ type: "SELECTED_PERSON", payload: data });
+    console.log(data);
+    getselectedData(data);
+    showList();
   };
   return (
     <TableContainer component={Paper}>
@@ -37,9 +39,9 @@ function List() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {person.map((row, index) => (
+          {person.map((row) => (
             <TableRow
-              key={row.firstName}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">

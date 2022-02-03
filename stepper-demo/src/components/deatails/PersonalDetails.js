@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, TextField, Box } from "@mui/material";
 
-function PersonalDetails({ handleChange, person, errors }) {
+function PersonalDetails({ handleChange, person, errors, selectData }) {
   const [profileImg, setProfileImg] = useState("");
   const [loadDone, setLoadDone] = useState(false);
 
@@ -43,7 +43,7 @@ function PersonalDetails({ handleChange, person, errors }) {
           name="firstName"
           onChange={handleChange}
           // defaultValue={person.firstName}
-          defaultValue="jaydeep"
+          defaultValue={selectData.firstName}
           label="First Name"
           error={!!errors.firstName}
           helperText={errors.firstName}
@@ -52,7 +52,7 @@ function PersonalDetails({ handleChange, person, errors }) {
         <TextField
           name="lastName"
           onChange={handleChange}
-          defaultValue={person.lastName}
+          defaultValue={selectData.lastName}
           label="Last Name"
           error={!!errors.lastName}
           helperText={errors.lastName}
@@ -60,7 +60,7 @@ function PersonalDetails({ handleChange, person, errors }) {
         <TextField
           name="phoneNumber"
           onChange={handleChange}
-          defaultValue={person.phoneNumber}
+          defaultValue={selectData.phoneNumber}
           label="Phone"
           error={!!errors.phoneNumber}
           helperText={errors.phoneNumber}
@@ -70,7 +70,7 @@ function PersonalDetails({ handleChange, person, errors }) {
           inputProps={{ type: "email" }}
           name="email"
           onChange={handleChange}
-          defaultValue={person.email}
+          defaultValue={selectData.email}
           label="Email"
           error={!!errors.email}
           helperText={errors.email}
@@ -78,7 +78,7 @@ function PersonalDetails({ handleChange, person, errors }) {
         <TextField
           name="dateOfBirth"
           onChange={handleChange}
-          defaultValue={person.dateOfBirth}
+          defaultValue={selectData.dateOfBirth}
           type="date"
           label="Date of Birth"
           error={!!errors.dateOfBirth}
