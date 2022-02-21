@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -22,7 +22,7 @@ function List({ getselectedData, showList }) {
 
   const editPersonHandler = (data) => {
     dispatch({ type: "SELECTED_PERSON", payload: data });
-    console.log(data);
+    // console.log("list", data);
     getselectedData(data);
     showList();
   };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Step, StepLabel, Stepper, Box } from "@mui/material";
 import PersonalDetails from "./deatails/PersonalDetails";
 import BankDetails from "./deatails/BankDetails";
@@ -33,7 +33,6 @@ const details = {
 let id = Math.random().toString();
 function Steps({ showList, selectData }) {
   const dispatch = useDispatch();
-  const length = useSelector((state) => state.selectedPerson.length);
   const [person, setPeroson] = useState(details);
   const [formErrors, setFormErrors] = useState({
     experienceDetails: [],
@@ -43,6 +42,9 @@ function Steps({ showList, selectData }) {
 
   const handleSubmit = () => {
     debugger;
+    console.log("selected", person);
+    console.log("selected id", person.id);
+    console.log("selected name", person.firstName);
 
     let ttype = "UPDATE_PERSON";
 

@@ -26,7 +26,8 @@ const formDetailReducer = (state = initialState, action) => {
 
     case "SELECTED_PERSON": {
       const newData = produce(state, (draft) => {
-        draft.selectedPerson[action.payload.name] = action.payload.value;
+        // draft.selectedPerson[action.payload.name] = action.payload.value;
+        draft.selectedPerson = action.payload;
       });
 
       return newData;
